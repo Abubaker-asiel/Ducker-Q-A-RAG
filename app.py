@@ -1,4 +1,6 @@
+import hmac
 import html
+import os
 import re
 from collections import Counter
 from pathlib import Path
@@ -92,12 +94,29 @@ span[data-baseweb="tag"] { background:var(--yellow) !important; color:var(--ink)
 )
 
 
+PASSWORD = os.getenv("APP_PASSWORD")
+if PASSWORD and not st.session_state.get("unlocked"):
+    st.markdown("<div class='hero'><h1>🔒 Password, please</h1></div>", unsafe_allow_html=True)
+    entered = st.text_input("Password", type="password", label_visibility="collapsed", placeholder="Enter password")
+    if entered and hmac.compare_digest(entered, PASSWORD):
+        st.session_state.unlocked = True
+        st.rerun()
+    elif entered:
+        st.error("Wrong password 🙈")
+    st.stop()
+
+
 @st.cache_resource
 def collection():
     return get_collection(STORE)
 
 
 col = collection()
+if col.count() == 0 and any(DATA.rglob("*.*")):  # fresh deploy: storage/ is not in git
+    with st.spinner("First start: building the index (about a minute)… 🧠"):
+        rebuild_index(STORE, load_all(DATA))
+    st.cache_resource.clear()
+    col = collection()
 indexed = col.count()
 st.session_state.setdefault("messages", [])
 per_course = Counter(m["course"] for m in col.get(include=["metadatas"])["metadatas"]) if indexed else Counter()
