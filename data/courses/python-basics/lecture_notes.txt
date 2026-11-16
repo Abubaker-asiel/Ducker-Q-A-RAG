@@ -1,0 +1,7 @@
+Lecture 3: Control flow and errors
+
+Python uses indentation to mark blocks. An if statement runs its block only when the condition is true; elif and else handle the other cases.
+
+A for loop walks over any iterable such as a list, a string or range(10). A while loop repeats until its condition becomes false, so make sure something inside the loop changes the condition.
+
+Errors are handled with try and except. Put risky code in try, catch the specific exception you expect (for example ValueError) and recover in except. A finally block always runs, which makes it the right place to close files or connections.

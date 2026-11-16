@@ -1,0 +1,7 @@
+question,answer,topic
+What is a list comprehension?,A compact way to build a list: [x*2 for x in nums if x > 0]. It replaces a for loop that appends to a list.,Lists
+What is the difference between a list and a tuple?,Lists are mutable and tuples are immutable. Use a tuple for fixed data that should not change.,Data types
+What does def do?,def defines a function. The indented block under it runs each time the function is called.,Functions
+What is a virtual environment?,An isolated folder of Python packages for one project. Create it with python -m venv .venv and activate it before running pip install.,Tooling
+How do I read a CSV file with pandas?,Use pandas.read_csv("file.csv"). It returns a DataFrame you can filter and group.,Pandas
+What is a dictionary?,A key-value mapping created with {}. Look up values by key: ages["Sara"].,Data types

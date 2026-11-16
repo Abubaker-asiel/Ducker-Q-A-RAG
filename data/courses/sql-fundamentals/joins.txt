@@ -1,0 +1,5 @@
+SQL joins combine rows from two tables using a related column.
+
+INNER JOIN keeps only rows that have a match in both tables. LEFT JOIN keeps every row from the left table and fills the right side with NULL when there is no match. FULL OUTER JOIN keeps unmatched rows from both sides.
+
+Example: SELECT s.name, c.title FROM students s INNER JOIN courses c ON s.course_id = c.id; returns each student with the title of their course.
